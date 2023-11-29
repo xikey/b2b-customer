@@ -15,7 +15,7 @@ class AuthApiProvider {
 
   dynamic callLoginAdmin(LoginAdminParams loginAdminParams) async {
     try {
-      final response = await dio.post("${Constants.baseUrl}/user/login",
+      final response = await dio.post("${Constants.baseUrl}/user/loginCustomer",
           data: {
             "code": loginAdminParams.user,
             "password": loginAdminParams.pass,

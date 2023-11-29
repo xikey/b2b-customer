@@ -6,6 +6,7 @@ import 'package:loading_animation_widget/loading_animation_widget.dart';
 import '../../../../common/widgets/app_background.dart';
 import '../../../feature_auth/presentation/screens/login_screen.dart';
 import '../bloc/splash_bloc.dart';
+import 'package:flutter_gif/flutter_gif.dart';
 
 class SplashScreenProvider extends StatelessWidget {
   const SplashScreenProvider({Key? key}) : super(key: key);
@@ -19,8 +20,29 @@ class SplashScreenProvider extends StatelessWidget {
   }
 }
 
-class SpashScreen extends StatelessWidget {
+class SpashScreen extends StatefulWidget {
   SpashScreen({super.key});
+
+  @override
+  State<SpashScreen> createState() => _SpashScreenState();
+}
+
+class _SpashScreenState extends State<SpashScreen>
+    with TickerProviderStateMixin {
+  late FlutterGifController controller;
+
+  @override
+  void initState() {
+    controller = FlutterGifController(vsync: this);
+    WidgetsBinding.instance?.addPostFrameCallback((_) {
+      controller.repeat(
+        min: 0,
+        max: 50,
+        reverse: true,
+        period: const Duration(milliseconds: 3000),
+      );
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,12 +56,12 @@ class SpashScreen extends StatelessWidget {
           children: [
             Expanded(
                 child: DelayedWidget(
-                    delayDuration: const Duration(milliseconds: 200),
-                    animationDuration: const Duration(milliseconds: 2000),
+                    delayDuration: const Duration(milliseconds: 1),
+                    animationDuration: const Duration(milliseconds: 1),
                     animation: DelayedAnimations.SLIDE_FROM_BOTTOM,
-                    child: Image.asset(
-                      'assets/images/img_yadegar_text_farsi_white.png',
-                      width: 250,
+                    child: GifImage(
+                      controller: controller,
+                      image: AssetImage("assets/images/yadegar_animated_logo.gif"),
                     ))),
             BlocConsumer<SplashBloc, SplashState>(
               listenWhen: (previous, current) {
@@ -105,7 +127,6 @@ class SpashScreen extends StatelessWidget {
   }
 
   Future<void> goToLogin(BuildContext context) async {
-
     return Future.delayed(const Duration(seconds: 3), () {
       Navigator.pushNamedAndRemoveUntil(
         context,

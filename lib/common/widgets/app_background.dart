@@ -13,5 +13,5 @@ class ZikeyAppBackground {
       // ),
       );
 
-  static final splashBackground = BoxDecoration(color: AppColors.yadegar_1);
+  static final splashBackground = BoxDecoration(color: Colors.black);
 }

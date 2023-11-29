@@ -1,3 +1,4 @@
+import 'package:b2b_customer/config/colors.dart';
 import 'package:flutter/material.dart';
 
 class ColorfulBackgroundWidget extends StatelessWidget {
@@ -8,17 +9,17 @@ class ColorfulBackgroundWidget extends StatelessWidget {
     return Container(
       width: double.infinity,
       height: double.infinity,
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
           gradient: LinearGradient(
         begin: Alignment.topRight,
         end: Alignment.bottomLeft,
         colors: [
-          Color(0x300081C9),
-          Color(0x30000000),
-          Color(0x30000000),
-          Color(0x30000000),
-          Color(0x30000000),
-          Color(0x30FFFF00),
+          AppColors.yadegar_1,
+          AppColors.yadegar_1,
+          AppColors.yadegar_1,
+          AppColors.yadegar_1,
+          AppColors.yadegar_1,
+
         ],
       )),
     );

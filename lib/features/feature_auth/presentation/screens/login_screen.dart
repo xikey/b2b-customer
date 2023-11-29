@@ -11,7 +11,7 @@ import '../../../../locator.dart';
 
 import '../../repository/auth_repository.dart';
 import '../cubit/login_cubit.dart';
-import '../widgets/login_admin_widget.dart';
+import '../widgets/login_widget.dart';
 
 class LoginScreenProvider extends StatelessWidget {
   static const routeName = '/login_screen';
@@ -45,7 +45,7 @@ class LoginScreen extends StatelessWidget {
                 state.loginStatus is LoginAdminStatus) {
               return AnimatedContainer(
                 duration: const Duration(milliseconds: 1000),
-                child: LoginAdminWidget(
+                child: LoginWidget(
                   adminUserController: _adminUserController,
                   adminPassController: _adminPassController,
                 ),

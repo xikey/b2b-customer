@@ -7,8 +7,8 @@ import '../../../../common/utils/validators.dart';
 import '../../../../common/widgets/colorful_background_widget.dart';
 import '../cubit/login_cubit.dart';
 
-class LoginAdminWidget extends StatelessWidget {
-  LoginAdminWidget(
+class LoginWidget extends StatelessWidget {
+  LoginWidget(
       {super.key,
       required this.adminUserController,
       required this.adminPassController});
@@ -70,7 +70,7 @@ class LoginAdminWidget extends StatelessWidget {
                 child: Container(
                   height: height,
                   width: width,
-                  color: Colors.white.withOpacity(0.6),
+                  color: Colors.white.withOpacity(0.9),
                   padding: const EdgeInsets.only(
                       left: 80, right: 80, top: 40, bottom: 40),
                   child: Column(
@@ -91,7 +91,7 @@ class LoginAdminWidget extends StatelessWidget {
                                   height: 30,
                                 ),
                                 const Text(
-                                  'پنل مدیران',
+                                  'پنل مشتریان',
                                   style: TextStyle(
                                     color: Colors.black54,
                                     fontSize: 16,
