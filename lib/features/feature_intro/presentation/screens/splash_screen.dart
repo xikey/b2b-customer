@@ -6,7 +6,7 @@ import 'package:loading_animation_widget/loading_animation_widget.dart';
 import '../../../../common/widgets/app_background.dart';
 import '../../../feature_auth/presentation/screens/login_screen.dart';
 import '../bloc/splash_bloc.dart';
-import 'package:flutter_gif/flutter_gif.dart';
+import 'package:gif_view/gif_view.dart';
 
 class SplashScreenProvider extends StatelessWidget {
   const SplashScreenProvider({Key? key}) : super(key: key);
@@ -29,21 +29,6 @@ class SpashScreen extends StatefulWidget {
 
 class _SpashScreenState extends State<SpashScreen>
     with TickerProviderStateMixin {
-  late FlutterGifController controller;
-
-  @override
-  void initState() {
-    controller = FlutterGifController(vsync: this);
-    WidgetsBinding.instance?.addPostFrameCallback((_) {
-      controller.repeat(
-        min: 0,
-        max: 50,
-        reverse: true,
-        period: const Duration(milliseconds: 3000),
-      );
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     BlocProvider.of<SplashBloc>(context).add(CheckConnectionEvent());
@@ -55,14 +40,23 @@ class _SpashScreenState extends State<SpashScreen>
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Expanded(
-                child: DelayedWidget(
-                    delayDuration: const Duration(milliseconds: 1),
-                    animationDuration: const Duration(milliseconds: 1),
-                    animation: DelayedAnimations.SLIDE_FROM_BOTTOM,
-                    child: GifImage(
-                      controller: controller,
-                      image: AssetImage("assets/images/yadegar_animated_logo.gif"),
-                    ))),
+              child: DelayedWidget(
+                delayDuration: const Duration(milliseconds: 1),
+                animationDuration: const Duration(milliseconds: 1),
+                animation: DelayedAnimations.SLIDE_FROM_BOTTOM,
+                child:  GifView.asset(
+                  'assets/images/yadegar_animated_logo.gif',
+                  height: 200,
+                  width: 200,
+                  frameRate: 15, // default is 15 FPS
+                ),
+
+                // ),  child: GifImage(
+                //   controller: controller,
+                //   image: AssetImage("assets/images/yadegar_animated_logo.gif"),
+                // ),
+              ),
+            ),
             BlocConsumer<SplashBloc, SplashState>(
               listenWhen: (previous, current) {
                 return previous != current;
