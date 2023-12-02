@@ -1,3 +1,4 @@
+import 'package:b2b_customer/features/feature_home/presentation/screen/home_screen.dart';
 import 'package:delayed_widget/delayed_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -122,11 +123,18 @@ class _SpashScreenState extends State<SpashScreen>
 
   Future<void> goToLogin(BuildContext context) async {
     return Future.delayed(const Duration(seconds: 3), () {
+
       Navigator.pushNamedAndRemoveUntil(
         context,
-        LoginScreenProvider.routeName,
+        HomeScreenProvider.routeName,
         ModalRoute.withName("main_wrapper"),
       );
+
+      // Navigator.pushNamedAndRemoveUntil(
+      //   context,
+      //   LoginScreenProvider.routeName,
+      //   ModalRoute.withName("main_wrapper"),
+      // );
     });
   }
 }

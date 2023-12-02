@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 import '../../config/colors.dart';
@@ -13,5 +12,7 @@ class ZikeyAppBackground {
       // ),
       );
 
-  static final splashBackground = BoxDecoration(color: Colors.black);
+  static const homeBackgroundDecoration = BoxDecoration(color: Colors.white);
+
+  static const splashBackground = BoxDecoration(color: Colors.black);
 }

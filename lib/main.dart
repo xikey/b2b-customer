@@ -1,3 +1,5 @@
+import 'package:b2b_customer/features/feature_home/presentation/cubit/home_cubit.dart';
+import 'package:b2b_customer/features/feature_home/presentation/screen/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -18,6 +20,7 @@ void main() async {
   runApp(MultiBlocProvider(providers: [
     BlocProvider(create: (_) => SplashBloc()),
     BlocProvider(create: (_) => LoginCubit(locator<AuthRepository>())),
+    BlocProvider(create: (_) => HomeCubit()),
   ], child: const MyApp()));
 }
 
@@ -43,6 +46,7 @@ class MyApp extends StatelessWidget {
       ],
       routes: {
         LoginScreenProvider.routeName: (context) => const LoginScreenProvider(),
+        HomeScreenProvider.routeName: (context) => const HomeScreenProvider(),
 
         // CategoryProfileScreenProvider.routeName: (context) =>
         // const CategoryProfileScreenProvider(),
