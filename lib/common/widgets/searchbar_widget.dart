@@ -10,12 +10,12 @@ class SearchBarWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      padding: EdgeInsets.all(10),
+      padding: EdgeInsets.all(8),
       color: Colors.white,
       child: InkWell(
         onTap: onTap,
         child: Container(
-          height: 40,
+          height: 42,
           width: double.infinity,
           decoration: BoxDecoration(
             color: AppColors.appGrey,
@@ -40,7 +40,7 @@ class SearchBarWidget extends StatelessWidget {
               ),
               Image.asset(
                 'assets/images/img_yadegar_text_farsi_colored_small.png',
-                width: 50,
+                width: 60,
                 fit: BoxFit.fill,
               ),
             ],
