@@ -15,5 +15,8 @@ class AppColors {
   static Color customerDarkCard= const Color(0xcc383443);
   static Color yadegar_1= const Color(0xFF99ca3c);
   static Color tableHeaderColor= const Color(0xff362f4b);
+  static Color appGrey= const Color(0xfff0f0f1);
+  static Color appGreyDarker= const Color(0xffa1a3a8);
+
 
 }
