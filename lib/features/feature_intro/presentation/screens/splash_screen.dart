@@ -124,17 +124,17 @@ class _SpashScreenState extends State<SpashScreen>
   Future<void> goToLogin(BuildContext context) async {
     return Future.delayed(const Duration(seconds: 3), () {
 
-      Navigator.pushNamedAndRemoveUntil(
-        context,
-        HomeScreenProvider.routeName,
-        ModalRoute.withName("main_wrapper"),
-      );
-
       // Navigator.pushNamedAndRemoveUntil(
       //   context,
-      //   LoginScreenProvider.routeName,
+      //   HomeScreenProvider.routeName,
       //   ModalRoute.withName("main_wrapper"),
       // );
+
+      Navigator.pushNamedAndRemoveUntil(
+        context,
+        LoginScreenProvider.routeName,
+        ModalRoute.withName("main_wrapper"),
+      );
     });
   }
 }

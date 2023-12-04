@@ -1,10 +1,9 @@
 import 'package:b2b_customer/config/colors.dart';
 import 'package:b2b_customer/features/feature_home/presentation/widgets/test_view_widget.dart';
+import 'package:b2b_customer/features/feature_home/presentation/widgets/vitrin/vitrin_widget.dart';
 import 'package:delayed_widget/delayed_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../../../config/constants.dart';
 import '../cubit/home_cubit.dart';
 
 class HomeWidget extends StatelessWidget {
@@ -16,10 +15,7 @@ class HomeWidget extends StatelessWidget {
 
     Widget mainWidgetSelector(int index) {
       if (index == 0) {
-        return const TestViewWidget(
-          name: 'index 0',
-          color: Colors.purple,
-        );
+        return const VitrinWidget();
       } else if (index == 1) {
         return const TestViewWidget(
           name: 'index 1',
