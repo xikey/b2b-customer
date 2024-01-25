@@ -1,3 +1,4 @@
+import 'package:b2b_customer/common/widgets/searchbar_widget.dart';
 import 'package:flutter/material.dart';
 
 class TestViewWidget extends StatelessWidget {
@@ -11,9 +12,7 @@ class TestViewWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: color,
-      child: Center(
-        child: Text(name),
-      ),
+      height: 1000,
     );
   }
 }

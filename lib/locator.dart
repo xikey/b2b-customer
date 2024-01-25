@@ -1,3 +1,5 @@
+import 'package:b2b_customer/features/feature_advertise/data/data_source/advertise_api_provider.dart';
+import 'package:b2b_customer/features/feature_advertise/repository/advertise_repository.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -24,8 +26,13 @@ Future<void> initLocator() async {
   locator
       .registerFactory<AuthApiProvider>(() => AuthApiProvider(dio: locator()));
 
+  locator.registerFactory<AdvertiseApiProvider>(
+      () => AdvertiseApiProvider(dio: locator()));
+
   ///Repo
   locator.registerFactory<SplashRepository>(() => SplashRepository());
   locator.registerFactory<AuthRepository>(
       () => AuthRepository(apiProvider: locator()));
+  locator.registerFactory<AdvertiseRepository>(
+      () => AdvertiseRepository(apiProvider: locator()));
 }

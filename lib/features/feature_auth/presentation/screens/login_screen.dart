@@ -1,4 +1,4 @@
-
+import 'package:b2b_customer/features/feature_home/presentation/screen/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -70,11 +70,11 @@ class LoginScreen extends StatelessWidget {
                     .showMessage(context, 'خطا', data.error!.message);
               }
               if (data is DataSuccess) {
-                // Navigator.pushNamedAndRemoveUntil(
-                //   context,
-                //   HomeScreenProvider.routeName,
-                //   ModalRoute.withName("home"),
-                // );
+                Navigator.pushNamedAndRemoveUntil(
+                  context,
+                  HomeScreenProvider.routeName,
+                  ModalRoute.withName("home"),
+                );
               }
             }
             if (state.loginStatus is FailedLoadingData) {

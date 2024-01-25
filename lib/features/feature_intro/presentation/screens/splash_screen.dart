@@ -47,8 +47,8 @@ class _SpashScreenState extends State<SpashScreen>
                 animation: DelayedAnimations.SLIDE_FROM_BOTTOM,
                 child:  GifView.asset(
                   'assets/images/yadegar_animated_logo.gif',
-                  height: 200,
-                  width: 200,
+                  height: 300,
+                  width: 300,
                   frameRate: 15, // default is 15 FPS
                 ),
 
@@ -124,17 +124,17 @@ class _SpashScreenState extends State<SpashScreen>
   Future<void> goToLogin(BuildContext context) async {
     return Future.delayed(const Duration(seconds: 3), () {
 
-      Navigator.pushNamedAndRemoveUntil(
-        context,
-        HomeScreenProvider.routeName,
-        ModalRoute.withName("main_wrapper"),
-      );
-
       // Navigator.pushNamedAndRemoveUntil(
       //   context,
-      //   LoginScreenProvider.routeName,
+      //   HomeScreenProvider.routeName,
       //   ModalRoute.withName("main_wrapper"),
       // );
+
+      Navigator.pushNamedAndRemoveUntil(
+        context,
+        LoginScreenProvider.routeName,
+        ModalRoute.withName("main_wrapper"),
+      );
     });
   }
 }

@@ -1,3 +1,5 @@
+import 'package:b2b_customer/features/feature_advertise/presentation/cubit/advertise_cubit.dart';
+import 'package:b2b_customer/features/feature_advertise/repository/advertise_repository.dart';
 import 'package:b2b_customer/features/feature_home/presentation/cubit/home_cubit.dart';
 import 'package:b2b_customer/features/feature_home/presentation/screen/home_screen.dart';
 import 'package:flutter/material.dart';
@@ -21,6 +23,7 @@ void main() async {
     BlocProvider(create: (_) => SplashBloc()),
     BlocProvider(create: (_) => LoginCubit(locator<AuthRepository>())),
     BlocProvider(create: (_) => HomeCubit()),
+    BlocProvider(create: (_) => AdvertiseCubit(locator<AdvertiseRepository>())),
   ], child: const MyApp()));
 }
 
