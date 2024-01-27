@@ -1,6 +1,8 @@
 import 'package:b2b_customer/common/widgets/app_background.dart';
 import 'package:b2b_customer/features/feature_advertise/presentation/cubit/advertise_cubit.dart';
 import 'package:b2b_customer/features/feature_advertise/repository/advertise_repository.dart';
+import 'package:b2b_customer/features/feature_product/presentation/cubit/product_cubit.dart';
+import 'package:b2b_customer/features/feature_product/repository/product_repository.dart';
 import 'package:b2b_customer/locator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -21,6 +23,9 @@ class HomeScreenProvider extends StatelessWidget {
       ),
       BlocProvider(
         create: (context) => AdvertiseCubit(locator<AdvertiseRepository>()),
+      ),
+      BlocProvider(
+        create: (context) => ProductCubit(locator<ProductRepository>()),
       ),
     ], child: const HomeScreen());
   }

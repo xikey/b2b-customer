@@ -1,4 +1,5 @@
 import 'package:b2b_customer/config/colors.dart';
+import 'package:b2b_customer/features/feature_home/presentation/widgets/categories/categories_widget.dart';
 import 'package:b2b_customer/features/feature_home/presentation/widgets/test_view_widget.dart';
 import 'package:b2b_customer/features/feature_home/presentation/widgets/vitrin/vitrin_widget.dart';
 import 'package:delayed_widget/delayed_widget.dart';
@@ -17,10 +18,7 @@ class HomeWidget extends StatelessWidget {
       if (index == 0) {
         return const VitrinWidget();
       } else if (index == 1) {
-        return const TestViewWidget(
-          name: 'index 1',
-          color: Colors.blue,
-        );
+        return const CategoriesWidget();
       } else if (index == 2) {
         return const TestViewWidget(
           name: 'index 2',
@@ -54,8 +52,7 @@ class HomeWidget extends StatelessWidget {
               child: Column(
                 children: [
                   Expanded(
-                    child: SingleChildScrollView(
-                        child: mainWidgetSelector(selectedIndex)),
+                    child: mainWidgetSelector(selectedIndex),
                   ),
                   Container(
                     height: 2,

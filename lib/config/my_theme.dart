@@ -49,6 +49,11 @@ class MyThemes {
     textTheme: Typography().black.apply(fontFamily: 'Estedad'),
     useMaterial3: true,
     fontFamily: 'Estedad',
+    textSelectionTheme: const TextSelectionThemeData(
+      cursorColor: Colors.blue, // Change this color to your preference
+      selectionColor: Colors.blue, // Change this color to your preference
+      selectionHandleColor: Colors.blue, // Change this color to your preference
+    ),
 
     // colorScheme: const ColorScheme.light()
   );

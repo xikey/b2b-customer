@@ -2,6 +2,9 @@ import 'package:b2b_customer/features/feature_advertise/presentation/cubit/adver
 import 'package:b2b_customer/features/feature_advertise/repository/advertise_repository.dart';
 import 'package:b2b_customer/features/feature_home/presentation/cubit/home_cubit.dart';
 import 'package:b2b_customer/features/feature_home/presentation/screen/home_screen.dart';
+import 'package:b2b_customer/features/feature_product/presentation/cubit/product_cubit.dart';
+import 'package:b2b_customer/features/feature_product/presentation/screen/products_screen.dart';
+import 'package:b2b_customer/features/feature_product/repository/product_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -24,6 +27,7 @@ void main() async {
     BlocProvider(create: (_) => LoginCubit(locator<AuthRepository>())),
     BlocProvider(create: (_) => HomeCubit()),
     BlocProvider(create: (_) => AdvertiseCubit(locator<AdvertiseRepository>())),
+    BlocProvider(create: (_) => ProductCubit(locator<ProductRepository>())),
   ], child: const MyApp()));
 }
 
@@ -50,6 +54,7 @@ class MyApp extends StatelessWidget {
       routes: {
         LoginScreenProvider.routeName: (context) => const LoginScreenProvider(),
         HomeScreenProvider.routeName: (context) => const HomeScreenProvider(),
+        ProductsScreenProvider.routeName: (context) => const ProductsScreenProvider(),
 
         // CategoryProfileScreenProvider.routeName: (context) =>
         // const CategoryProfileScreenProvider(),
