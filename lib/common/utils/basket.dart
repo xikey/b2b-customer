@@ -28,11 +28,11 @@ class Basket {
           OrderedProduct.fromJson(json.decode(basketItems[i]));
 
       // Check if the product codes match
-      if (existingProduct.productCode == orderedProduct.productCode) {
+      if (existingProduct.productId == orderedProduct.productId) {
         // Update the order count instead of adding a new product
         newOrderCount += existingProduct.orderCount;
         basketItems[i] = json.encode(OrderedProduct(
-          productCode: existingProduct.productCode,
+          productId: existingProduct.productId,
           orderCount: newOrderCount,
         ).toJson());
 
@@ -51,7 +51,7 @@ class Basket {
   }
 
   // Remove an ordered product from the basket based on the product code
-  removeOrderedProduct(int productCode) async {
+  removeOrderedProduct(int productID) async {
     List<String> basketItems =
         sharedPreferences.getStringList('basketItems') ?? [];
 
@@ -59,7 +59,7 @@ class Basket {
     basketItems.removeWhere((item) {
       OrderedProduct orderedProduct =
           OrderedProduct.fromJson(json.decode(item));
-      return orderedProduct.productCode == productCode;
+      return orderedProduct.productId == productID;
     });
 
     // Save the updated list to SharedPreferences
@@ -77,7 +77,7 @@ class Basket {
           OrderedProduct.fromJson(json.decode(basketItems[i]));
 
       // Check if the product codes match
-      if (existingProduct.productCode == updatedOrderedProduct.productCode) {
+      if (existingProduct.productId == updatedOrderedProduct.productId) {
         basketItems[i] = json.encode(updatedOrderedProduct.toJson());
         break;
       }

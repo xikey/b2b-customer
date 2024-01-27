@@ -17,10 +17,10 @@ class ProductsWidget extends StatelessWidget {
   final Category category;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext buildContext) {
     String keySearch = "";
     List<Product> products = [];
-    BlocProvider.of<ProductCubit>(context)
+    BlocProvider.of<ProductCubit>(buildContext)
         .getAllProductsOfCategory(category.id);
     return BlocConsumer<ProductCubit, ProductState>(
       buildWhen: (previous, current) => previous != current,
@@ -88,7 +88,7 @@ class ProductsWidget extends StatelessWidget {
                     builder: (BuildContext context) {
                       return AddToBasketDialog(product: filteredProducts[index],);
                     },
-                  ); },
+                  ).then((value) => BlocProvider.of<ProductCubit>(buildContext).reloadBasketBudge()); },
                   );
                 },
               ),

@@ -39,15 +39,20 @@ class ProductApiProvider {
     }
   }
 
-  dynamic callGetAllProducts(String token) async {
+  dynamic callGetAllProducts(String token, String? productIds) async {
     try {
       final options = Options(
         headers: {
           'Authorization': 'Bearer ${token}',
         },
       );
-      final response = await dio.get("${Constants.baseUrl}/product/getAll",
-          options: options);
+      final response = await dio.get(
+        "${Constants.baseUrl}/product/getAll",
+        options: options,
+        queryParameters: {
+          'productsID': productIds,
+        },
+      );
       //
       // ZikeyLogger.showLog(
       //     "Product Api Provider ", response.toString());

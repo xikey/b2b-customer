@@ -15,9 +15,9 @@ class ProductRepository {
     required this.apiProvider,
   });
 
-  Future<DataState<List<Product>>> getAllProducts(String token) async {
+  Future<DataState<List<Product>>> getAllProducts(String token,String? productIds) async {
     try {
-      Response response = await apiProvider.callGetAllProducts(token);
+      Response response = await apiProvider.callGetAllProducts(token,productIds);
 
       //  ZikeyLogger.showLog("Customers Response", response.toString());
       final products = Product.fromList(response.data as List);

@@ -1,11 +1,15 @@
+import 'package:b2b_customer/common/utils/logger.dart';
 import 'package:b2b_customer/config/colors.dart';
+import 'package:b2b_customer/features/feature_home/presentation/widgets/basket/basket_widget.dart';
 import 'package:b2b_customer/features/feature_home/presentation/widgets/categories/categories_widget.dart';
 import 'package:b2b_customer/features/feature_home/presentation/widgets/test_view_widget.dart';
 import 'package:b2b_customer/features/feature_home/presentation/widgets/vitrin/vitrin_widget.dart';
+import 'package:b2b_customer/features/feature_product/presentation/cubit/product_cubit.dart';
 import 'package:delayed_widget/delayed_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../cubit/home_cubit.dart';
+import 'package:badges/badges.dart' as badges;
 
 class HomeWidget extends StatelessWidget {
   const HomeWidget({Key? key}) : super(key: key);
@@ -14,16 +18,15 @@ class HomeWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     int selectedIndex = 0;
 
+    BlocProvider.of<ProductCubit>(context).reloadBasketBudge();
+
     Widget mainWidgetSelector(int index) {
       if (index == 0) {
         return const VitrinWidget();
       } else if (index == 1) {
         return const CategoriesWidget();
       } else if (index == 2) {
-        return const TestViewWidget(
-          name: 'index 2',
-          color: Colors.red,
-        );
+        return const BasketWidget();
       } else {
         return const TestViewWidget(
           name: 'index 3',
@@ -67,20 +70,41 @@ class HomeWidget extends StatelessWidget {
                     selectedLabelStyle:
                         const TextStyle(fontWeight: FontWeight.bold),
                     unselectedItemColor: Colors.black38,
-                    items: const <BottomNavigationBarItem>[
-                      BottomNavigationBarItem(
+                    items: <BottomNavigationBarItem>[
+                      const BottomNavigationBarItem(
                         icon: Icon(Icons.home_rounded),
                         label: 'خانه',
                       ),
-                      BottomNavigationBarItem(
+                      const BottomNavigationBarItem(
                         icon: Icon(Icons.category_rounded),
                         label: 'دسته بندی',
                       ),
                       BottomNavigationBarItem(
-                        icon: Icon(Icons.shopping_basket_rounded),
+                        icon: BlocBuilder<ProductCubit, ProductState>(
+                          buildWhen: (previous, current)=>current.productStatus is ReloadBasketBadge,
+                          builder: (context, state) {
+                            int itemCount =
+                                0; // Initialize with a default value
+                            if (state.productStatus is ReloadBasketBadge) {
+                              final status =
+                                  state.productStatus as ReloadBasketBadge;
+                              itemCount = status.count;
+                            }
+
+                            return badges.Badge(
+                              badgeContent: Text(
+                                '$itemCount',
+                                style: const TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              child: const Icon(Icons.shopping_basket_rounded),
+                            );
+                          },
+                        ),
                         label: 'سبد خرید',
                       ),
-                      BottomNavigationBarItem(
+                      const BottomNavigationBarItem(
                         icon: Icon(Icons.person_rounded),
                         label: 'پروفایل',
                       ),

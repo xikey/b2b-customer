@@ -1,5 +1,4 @@
 import 'package:b2b_customer/common/resources/data_state.dart';
-import 'package:b2b_customer/common/utils/logger.dart';
 import 'package:b2b_customer/common/utils/toasty.dart';
 import 'package:b2b_customer/config/colors.dart';
 import 'package:b2b_customer/features/feature_home/presentation/widgets/categories/category_card_item.dart';
@@ -71,10 +70,13 @@ class CategoriesWidget extends StatelessWidget {
                     width: cardWidth,
                     category: categories[index],
                     onTap: () {
-                      Navigator.of(context).pushNamed(
-                          ProductsScreenProvider.routeName,
-                          arguments:
-                              ProductsScreenArgs(category: categories[index]));
+                      Navigator.of(context)
+                          .pushNamed(ProductsScreenProvider.routeName,
+                              arguments: ProductsScreenArgs(
+                                  category: categories[index]))
+                          .then((value) =>
+                              BlocProvider.of<ProductCubit>(context)
+                                  .reloadBasketBudge());
                     },
                   );
                 },

@@ -1,22 +1,22 @@
 class OrderedProduct {
-  int productCode;
+  int productId;
   double orderCount;
 
   OrderedProduct({
-    required this.productCode,
+    required this.productId,
     required this.orderCount,
   });
 
   Map<String, dynamic> toJson() {
     return {
-      'productCode': productCode,
+      'productId': productId,
       'orderCount': orderCount,
     };
   }
 
   factory OrderedProduct.fromJson(Map<String, dynamic> json) {
     return OrderedProduct(
-      productCode: json['productCode'] as int,
+      productId: json['productId'] as int,
       orderCount: json['orderCount'] as double,
     );
   }

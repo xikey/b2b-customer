@@ -113,16 +113,13 @@ class _AddToBasketDialogState extends State<AddToBasketDialog> {
           const SizedBox(
             height: 10,
           ),
-          Container(
-            child: Center(
-              child: buildRichText("مقدار نهایی",
-                  "$totalCount ${widget.product.vahedAsli}", context),
-            ),
+          Center(
+            child: buildRichText("مقدار نهایی",
+                "$totalCount ${widget.product.vahedAsli}", context),
           ),
-          Container(
-              child: Center(
-                  child: buildRichText("مبلغ نهایی",
-                      "${price.toString().seRagham()} ریال", context))),
+          Center(
+              child: buildRichText("مبلغ نهایی",
+                  "${price.toString().seRagham()} ریال", context)),
         ],
       ),
       actions: [
@@ -138,10 +135,10 @@ class _AddToBasketDialogState extends State<AddToBasketDialog> {
               ZikeyToast().showSnackBarError(context, "مقادیر نادرست میباشند");
             } else {
               locator<Basket>().addOrderedProduct(OrderedProduct(
-                  productCode: widget.product.code, orderCount: totalCount));
+                  productId: widget.product.id, orderCount: totalCount));
             }
 
-            //Navigator.of(context).pop(_inputController.text);
+            Navigator.of(context).pop();
           },
           child: const Text('ذخیره'),
         ),
