@@ -43,12 +43,12 @@ class vitrin_categories extends StatelessWidget {
         if (categories.isNotEmpty) {
           return LayoutBuilder(
               builder: (BuildContext context, BoxConstraints constraints) {
-            double cardWidth = 90;
+            double cardWidth = 80;
 
             return Container(
               padding: const EdgeInsets.all(10),
               width: constraints.maxWidth,
-              height: 170,
+              height: 150,
               color: AppColors.yadegar_1,
               child: AlignedGridView.count(
                 crossAxisCount: categories.length,

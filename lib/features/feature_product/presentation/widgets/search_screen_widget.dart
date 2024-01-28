@@ -6,15 +6,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
+import '../../../../common/params/args/product_screen_args.dart';
 import '../../../../common/resources/data_state.dart';
 import '../../../../common/utils/toasty.dart';
 import '../../../../common/widgets/dot_loading_widget.dart';
 import '../../../../config/colors.dart';
 import '../cubit/product_cubit.dart';
+import '../screen/product_screen.dart';
 
 class SearchScreenWidget extends StatelessWidget {
   const SearchScreenWidget({Key? key}) : super(key: key);
-
 
   @override
   Widget build(BuildContext buildContext) {
@@ -35,7 +36,6 @@ class SearchScreenWidget extends StatelessWidget {
                 .showSnackBarError(context, "خطا در دریافت اطلاعات  محصولات");
           }
         }
-
       },
       builder: (context, state) {
         if (state.productStatus is LoadingStatus) {
@@ -54,8 +54,6 @@ class SearchScreenWidget extends StatelessWidget {
 
             double count = pageWidth / cardWidth;
 
-
-
             return Container(
               padding: const EdgeInsets.all(10),
               width: constraints.maxWidth,
@@ -70,7 +68,15 @@ class SearchScreenWidget extends StatelessWidget {
                   return ProductCardItem(
                     width: cardWidth,
                     product: products[index],
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.of(context)
+                          .pushNamed(ProductScreenProvider.routeName,
+                              arguments:
+                                  ProductScreenArgs(product: products[index]))
+                          .then((value) =>
+                              BlocProvider.of<ProductCubit>(buildContext)
+                                  .reloadBasketBudge());
+                    },
                     addToBasket: () {
                       showDialog(
                         context: context,

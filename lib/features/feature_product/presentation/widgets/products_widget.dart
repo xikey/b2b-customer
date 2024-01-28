@@ -6,11 +6,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
+import '../../../../common/params/args/product_screen_args.dart';
 import '../../../../common/resources/data_state.dart';
 import '../../../../common/utils/toasty.dart';
 import '../../../../common/widgets/dot_loading_widget.dart';
 import '../../../../config/colors.dart';
 import '../cubit/product_cubit.dart';
+import '../screen/product_screen.dart';
 
 class ProductsWidget extends StatelessWidget {
   const ProductsWidget({Key? key, required this.category}) : super(key: key);
@@ -81,7 +83,13 @@ class ProductsWidget extends StatelessWidget {
                   return ProductCardItem(
                     width: cardWidth,
                     product: filteredProducts[index],
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.of(context)
+                          .pushNamed(ProductScreenProvider.routeName,
+                          arguments: ProductScreenArgs(
+                              product: filteredProducts[index]));
+
+                    },
                     addToBasket: () {
                       showDialog(
                         context: context,

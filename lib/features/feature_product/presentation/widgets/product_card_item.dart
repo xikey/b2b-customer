@@ -11,7 +11,7 @@ class ProductCardItem extends StatelessWidget {
       required this.width,
       required this.product,
       required this.onTap,
-        required this.addToBasket})
+      required this.addToBasket})
       : super(key: key);
 
   final double width;
@@ -74,9 +74,10 @@ class ProductCardItem extends StatelessWidget {
                   )),
                 ),
                 TextButton(
-                  onPressed:addToBasket,
+                  onPressed: addToBasket,
                   style: TextButton.styleFrom(
-                    padding: const EdgeInsets.all(0), // Adjust padding as needed
+                    padding: const EdgeInsets.all(0),
+                    // Adjust padding as needed
                     backgroundColor: Colors.amber,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(0),
@@ -96,7 +97,6 @@ class ProductCardItem extends StatelessWidget {
                     ),
                   ),
                 ),
-
               ],
             ),
           ),

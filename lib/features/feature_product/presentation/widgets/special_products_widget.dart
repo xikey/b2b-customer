@@ -3,10 +3,12 @@ import 'package:b2b_customer/features/feature_product/data/model/product.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../common/params/args/product_screen_args.dart';
 import '../../../../common/resources/data_state.dart';
 import '../../../../common/widgets/add_to_basket_widget.dart';
 import '../../../../common/widgets/dot_loading_widget.dart';
 import '../cubit/product_cubit.dart';
+import '../screen/product_screen.dart';
 import 'home_product_card_item.dart';
 
 class SpecialProductsWidget extends StatelessWidget {
@@ -71,7 +73,15 @@ class SpecialProductsWidget extends StatelessWidget {
                         height: 350,
                         addColor: Colors.redAccent,
                         product: list[index - 1],
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.of(context)
+                              .pushNamed(ProductScreenProvider.routeName,
+                              arguments: ProductScreenArgs(
+                                  product: list[index - 1]))
+                              .then((value) =>
+                              BlocProvider.of<ProductCubit>(context)
+                                  .reloadBasketBudge());
+                        },
                         addToBasket: () {
                           showDialog(
                             context: context,

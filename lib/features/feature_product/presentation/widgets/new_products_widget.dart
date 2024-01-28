@@ -1,3 +1,4 @@
+import 'package:b2b_customer/common/params/args/product_screen_args.dart';
 import 'package:b2b_customer/config/colors.dart';
 import 'package:b2b_customer/features/feature_product/data/model/product.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +8,7 @@ import '../../../../common/resources/data_state.dart';
 import '../../../../common/widgets/add_to_basket_widget.dart';
 import '../../../../common/widgets/dot_loading_widget.dart';
 import '../cubit/product_cubit.dart';
+import '../screen/product_screen.dart';
 import 'home_product_card_item.dart';
 
 class NewProductsWidget extends StatelessWidget {
@@ -14,11 +16,10 @@ class NewProductsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     BlocProvider.of<ProductCubit>(context).getAllNewProducts();
     return BlocConsumer<ProductCubit, ProductState>(
-      buildWhen: (previous, current) => current.productStatus is GetNewProductsStatus ,
-
+      buildWhen: (previous, current) =>
+          current.productStatus is GetNewProductsStatus,
       listener: (context, state) {},
       builder: (context, state) {
         if (state.productStatus is LoadingStatus) {
@@ -61,7 +62,9 @@ class NewProductsWidget extends StatelessWidget {
                                 maxLines: 3,
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
-                                    fontWeight: FontWeight.bold, fontSize: 36,color: Colors.black54),
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 36,
+                                    color: Colors.black54),
                               )
                             ],
                           ),
@@ -72,7 +75,15 @@ class NewProductsWidget extends StatelessWidget {
                         height: 350,
                         addColor: Colors.blueAccent,
                         product: list[index - 1],
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.of(context)
+                              .pushNamed(ProductScreenProvider.routeName,
+                                  arguments: ProductScreenArgs(
+                                      product: list[index - 1]))
+                              .then((value) =>
+                                  BlocProvider.of<ProductCubit>(context)
+                                      .reloadBasketBudge());
+                        },
                         addToBasket: () {
                           showDialog(
                             context: context,
