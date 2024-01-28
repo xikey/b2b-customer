@@ -12,22 +12,19 @@ import '../../../../common/widgets/dot_loading_widget.dart';
 import '../../../../config/colors.dart';
 import '../cubit/product_cubit.dart';
 
-class ProductsWidget extends StatelessWidget {
-  const ProductsWidget({Key? key, required this.category}) : super(key: key);
-  final Category category;
+class SearchScreenWidget extends StatelessWidget {
+  const SearchScreenWidget({Key? key}) : super(key: key);
+
 
   @override
   Widget build(BuildContext buildContext) {
-    String keySearch = "";
     List<Product> products = [];
-    BlocProvider.of<ProductCubit>(buildContext)
-        .getAllProductsOfCategory(category.id);
     return BlocConsumer<ProductCubit, ProductState>(
       buildWhen: (previous, current) => previous != current,
       listenWhen: (previous, current) => previous != current,
       listener: (context, state) {
-        if (state.productStatus is GetProductsOfCategoryStatus) {
-          final status = state.productStatus as GetProductsOfCategoryStatus;
+        if (state.productStatus is GetProductsStatus) {
+          final status = state.productStatus as GetProductsStatus;
           if (status.dataState is DataSuccess) {
             final data = status.dataState as DataSuccess;
             if (data.data != null) {
@@ -39,10 +36,6 @@ class ProductsWidget extends StatelessWidget {
           }
         }
 
-        if (state.productStatus is SearchStatus) {
-          final status = state.productStatus as SearchStatus;
-          keySearch = status.keySearch;
-        }
       },
       builder: (context, state) {
         if (state.productStatus is LoadingStatus) {
@@ -61,11 +54,7 @@ class ProductsWidget extends StatelessWidget {
 
             double count = pageWidth / cardWidth;
 
-            List<Product> filteredProducts = products
-                .where((product) => product.name
-                    .toLowerCase()
-                    .contains(keySearch.toLowerCase()))
-                .toList();
+
 
             return Container(
               padding: const EdgeInsets.all(10),
@@ -75,19 +64,19 @@ class ProductsWidget extends StatelessWidget {
               child: AlignedGridView.count(
                 crossAxisCount: count.toInt(),
                 mainAxisSpacing: 4,
-                itemCount: filteredProducts.length,
+                itemCount: products.length,
                 crossAxisSpacing: 4,
                 itemBuilder: (context, index) {
                   return ProductCardItem(
                     width: cardWidth,
-                    product: filteredProducts[index],
+                    product: products[index],
                     onTap: () {},
                     addToBasket: () {
                       showDialog(
                         context: context,
                         builder: (BuildContext context) {
                           return AddToBasketDialog(
-                            product: filteredProducts[index],
+                            product: products[index],
                           );
                         },
                       ).then((value) =>

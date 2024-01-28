@@ -4,10 +4,12 @@ import 'package:b2b_customer/features/feature_home/presentation/cubit/home_cubit
 import 'package:b2b_customer/features/feature_home/presentation/screen/home_screen.dart';
 import 'package:b2b_customer/features/feature_product/presentation/cubit/product_cubit.dart';
 import 'package:b2b_customer/features/feature_product/presentation/screen/products_screen.dart';
+import 'package:b2b_customer/features/feature_product/presentation/screen/serach_screen.dart';
 import 'package:b2b_customer/features/feature_product/repository/product_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'config/my_scroll_behavior.dart';
 import 'config/my_theme.dart';
 import 'config/platform_manager.dart';
 import 'features/feature_auth/presentation/cubit/login_cubit.dart';
@@ -38,6 +40,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     locator<PlatformManager>().setPlatform(context);
     return MaterialApp(
+      scrollBehavior: MyScrollBehavior(),
       themeMode: ThemeMode.light,
       theme: MyThemes.lightTheme,
       initialRoute: "/",
@@ -55,6 +58,7 @@ class MyApp extends StatelessWidget {
         LoginScreenProvider.routeName: (context) => const LoginScreenProvider(),
         HomeScreenProvider.routeName: (context) => const HomeScreenProvider(),
         ProductsScreenProvider.routeName: (context) => const ProductsScreenProvider(),
+        SearchScreenProvider.routeName: (context) => const SearchScreenProvider(),
 
         // CategoryProfileScreenProvider.routeName: (context) =>
         // const CategoryProfileScreenProvider(),

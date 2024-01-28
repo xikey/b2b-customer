@@ -39,19 +39,31 @@ class ProductApiProvider {
     }
   }
 
-  dynamic callGetAllProducts(String token, String? productIds) async {
+  dynamic callGetAllProducts(String token, String? productIds,{String? keySearch}) async {
     try {
       final options = Options(
         headers: {
           'Authorization': 'Bearer ${token}',
         },
       );
+
+      // Create an empty map for query parameters
+      Map<String, dynamic> queryParameters = {};
+
+      // Add 'productsID' to the queryParameters if productIds is not null
+      if (productIds != null) {
+        queryParameters['productsID'] = productIds;
+      }
+
+      // Add 'keySearch' to the queryParameters if keySearch is not null
+      if (keySearch != null) {
+        queryParameters['keySearch'] = keySearch;
+      }
+
       final response = await dio.get(
         "${Constants.baseUrl}/product/getAll",
         options: options,
-        queryParameters: {
-          'productsID': productIds,
-        },
+        queryParameters:queryParameters,
       );
       //
       // ZikeyLogger.showLog(

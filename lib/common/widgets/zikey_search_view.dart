@@ -5,11 +5,15 @@ class ZikeySearchAppBarView extends StatefulWidget {
       {Key? key,
       required this.title,
       required this.onTextChanged,
-      required this.onClosed})
+      required this.onClosed,
+      required this.onSubmit,
+      this.searchOnStart = false})
       : super(key: key);
   final String title;
   final Function(String) onTextChanged;
+  final Function(String) onSubmit;
   final Function onClosed;
+  final bool searchOnStart;
 
   @override
   State<ZikeySearchAppBarView> createState() => _ZikeySearchAppBarViewState();
@@ -18,6 +22,12 @@ class ZikeySearchAppBarView extends StatefulWidget {
 class _ZikeySearchAppBarViewState extends State<ZikeySearchAppBarView> {
   bool isSearching = false;
   TextEditingController _searchController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    isSearching = widget.searchOnStart;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -53,6 +63,8 @@ class _ZikeySearchAppBarViewState extends State<ZikeySearchAppBarView> {
                     child: TextField(
                       controller: _searchController,
                       onChanged: widget.onTextChanged,
+                      onSubmitted: widget.onSubmit,
+                      textInputAction: TextInputAction.search,
                       decoration: const InputDecoration(
                         hintText: 'جستجو',
                       ),

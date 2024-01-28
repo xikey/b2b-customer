@@ -23,10 +23,10 @@ class ProductCubit extends Cubit<ProductState> {
     this.productRepository,
   ) : super(ProductState(productStatus: InitialStatus()));
 
-  void getAllProducts() async {
+  void getAllProducts({String? keySearch}) async {
     final token = await locator<PrefsOperator>().getUserToken();
     emit(state.copyWith(newStatus: LoadingStatus()));
-    final DataState dataState = await productRepository.getAllProducts(token,null);
+    final DataState dataState = await productRepository.getAllProducts(token,null,keySearch: keySearch);
 
     emit(state.copyWith(newStatus: GetProductsStatus(dataState)));
   }
@@ -99,7 +99,7 @@ class ProductCubit extends Cubit<ProductState> {
     final DataState dataState =
         await productRepository.getAllNewProducts(token);
 
-    emit(state.copyWith(newStatus: GetProductsStatus(dataState)));
+    emit(state.copyWith(newStatus: GetNewProductsStatus(dataState)));
   }
 
   void getAllSpecialProducts() async {
@@ -108,7 +108,7 @@ class ProductCubit extends Cubit<ProductState> {
     final DataState dataState =
         await productRepository.getAllSpecialProducts(token);
 
-    emit(state.copyWith(newStatus: GetProductsStatus(dataState)));
+    emit(state.copyWith(newStatus: GetSpecialProductsStatus(dataState)));
   }
 
   void getAllCategories() async {

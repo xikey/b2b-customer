@@ -19,6 +19,18 @@ class GetProductsOfCategoryStatus extends ProductStatus {
   GetProductsOfCategoryStatus(this.dataState);
 }
 
+class GetSpecialProductsStatus extends ProductStatus {
+  final DataState dataState;
+
+  GetSpecialProductsStatus(this.dataState);
+}
+
+class GetNewProductsStatus extends ProductStatus {
+  final DataState dataState;
+
+  GetNewProductsStatus(this.dataState);
+}
+
 class GetBasketItems extends ProductStatus {
   final DataState dataState;
 

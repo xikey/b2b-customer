@@ -8,8 +8,13 @@ import 'package:flutter/material.dart';
 import 'package:persian_number_utility/persian_number_utility.dart';
 
 class AddToBasketDialog extends StatefulWidget {
-  const AddToBasketDialog({Key? key, required this.product}) : super(key: key);
+  const AddToBasketDialog(
+      {Key? key, required this.product, this.orderedProduct})
+      : super(key: key);
   final Product product;
+
+  //This is just for Edit Mode
+  final OrderedProduct? orderedProduct;
 
   @override
   State<AddToBasketDialog> createState() => _AddToBasketDialogState();
@@ -23,9 +28,28 @@ class _AddToBasketDialogState extends State<AddToBasketDialog> {
   int pack = 0;
   double totalCount = 0;
   int price = 0;
+  String title = 'افزودن به سبد خرید';
+
+  @override
+  void initState() {
+    super.initState();
+
+    if (widget.orderedProduct != null) {
+      final countPerPack = widget.product.mShomaresh!;
+      pack = widget.orderedProduct!.orderCount ~/ countPerPack;
+      count = widget.orderedProduct!.orderCount % countPerPack;
+
+      _packController.text = pack.toString();
+      _countController.text = count.toString();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
+    if (widget.orderedProduct != null) {
+      title = 'ویرایش سبد خرید';
+    }
+
     void calculator() {
       try {
         double countPerPack = widget.product.mShomaresh!;
@@ -37,8 +61,12 @@ class _AddToBasketDialogState extends State<AddToBasketDialog> {
       } catch (e) {}
     }
 
+    if (widget.orderedProduct != null) {
+      calculator();
+    }
+
     return AlertDialog(
-      title: const Text('افزودن به سبد خرید'),
+      title: Text(title),
       content: Column(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.start,
@@ -129,13 +157,30 @@ class _AddToBasketDialogState extends State<AddToBasketDialog> {
           },
           child: const Text('انصراف'),
         ),
+        Visibility(
+          visible: widget.orderedProduct != null,
+          child: TextButton(
+            onPressed: () {
+              locator<Basket>().removeOrderedProduct(widget.product.id);
+              Navigator.of(context).pop(); // Close the dialog without a result
+            },
+            child: const Text('حذف'),
+          ),
+        ),
         TextButton(
           onPressed: () {
             if (totalCount <= 0) {
               ZikeyToast().showSnackBarError(context, "مقادیر نادرست میباشند");
             } else {
-              locator<Basket>().addOrderedProduct(OrderedProduct(
-                  productId: widget.product.id, orderCount: totalCount));
+              if (widget.orderedProduct != null) {
+                //Edit Mode
+                locator<Basket>().updateOrderedProduct(OrderedProduct(
+                    productId: widget.product.id, orderCount: totalCount));
+              } else {
+                //New Product
+                locator<Basket>().addOrderedProduct(OrderedProduct(
+                    productId: widget.product.id, orderCount: totalCount));
+              }
             }
 
             Navigator.of(context).pop();

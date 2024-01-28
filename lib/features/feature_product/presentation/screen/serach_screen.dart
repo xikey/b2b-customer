@@ -8,30 +8,24 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../common/widgets/zikey_search_view.dart';
+import '../widgets/search_screen_widget.dart';
 
-class ProductsScreenProvider extends StatelessWidget {
-  static const routeName = '/products_screen';
+class SearchScreenProvider extends StatelessWidget {
+  static const routeName = '/search_screen';
 
-  const ProductsScreenProvider({Key? key}) : super(key: key);
+  const SearchScreenProvider({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final args =
-        ModalRoute.of(context)?.settings.arguments as ProductsScreenArgs;
-
     return BlocProvider(
       create: (context) => ProductCubit(locator<ProductRepository>()),
-      child: ProductsScreen(
-        category: args.category,
-      ),
+      child: const SearchScreen(),
     );
   }
 }
 
-class ProductsScreen extends StatelessWidget {
-  const ProductsScreen({Key? key, required this.category}) : super(key: key);
-
-  final Category category;
+class SearchScreen extends StatelessWidget {
+  const SearchScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -39,20 +33,19 @@ class ProductsScreen extends StatelessWidget {
         child: Scaffold(
       appBar: AppBar(
         title: ZikeySearchAppBarView(
-          title: category.name,
-          onTextChanged: (text) {
-            BlocProvider.of<ProductCubit>(context).search(text);
-          },
+          searchOnStart: true,
+          title: 'محصولات',
+          onTextChanged: (text) {},
           onClosed: () {
-            BlocProvider.of<ProductCubit>(context).search("");
-          }, onSubmit: (text ) {
-          BlocProvider.of<ProductCubit>(context).search(text);
-        },
+            Navigator.of(context).pop();
+          },
+          onSubmit: (text) {
+            BlocProvider.of<ProductCubit>(context)
+                .getAllProducts(keySearch: text);
+          },
         ),
       ),
-      body: ProductsWidget(
-        category: category,
-      ),
+      body: const SearchScreenWidget(),
     ));
   }
 }

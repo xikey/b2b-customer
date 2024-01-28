@@ -6,17 +6,18 @@ import '../../../../../common/widgets/rich_text_builder.dart';
 import '../../../../../common/widgets/zikey_image_view.dart';
 
 class BasketCardItem extends StatelessWidget {
-  const BasketCardItem({Key? key, required this.basketItem}) : super(key: key);
+  const BasketCardItem({Key? key, required this.basketItem, required this.onTapEdit}) : super(key: key);
 
   final BasketItem basketItem;
   final double height = 100;
+  final Function() onTapEdit;
 
   @override
   Widget build(BuildContext context) {
     int price =
         (basketItem.orderCount * basketItem.product.priceForoosh!).toInt();
     return InkWell(
-      onTap: () {},
+      onTap: onTapEdit,
       child: Container(
         color: Colors.white,
         height: height,
