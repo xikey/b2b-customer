@@ -3,6 +3,7 @@ import 'dart:html';
 import 'package:b2b_customer/common/utils/basket.dart';
 import 'package:b2b_customer/common/utils/logger.dart';
 import 'package:b2b_customer/features/feature_product/data/model/basket_item.dart';
+import 'package:b2b_customer/features/feature_product/data/model/payment_type.dart';
 import 'package:b2b_customer/features/feature_product/data/model/product.dart';
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
@@ -26,7 +27,8 @@ class ProductCubit extends Cubit<ProductState> {
   void getAllProducts({String? keySearch}) async {
     final token = await locator<PrefsOperator>().getUserToken();
     emit(state.copyWith(newStatus: LoadingStatus()));
-    final DataState dataState = await productRepository.getAllProducts(token,null,keySearch: keySearch);
+    final DataState dataState = await productRepository
+        .getAllProducts(token, null, keySearch: keySearch);
 
     emit(state.copyWith(newStatus: GetProductsStatus(dataState)));
   }
@@ -63,7 +65,6 @@ class ProductCubit extends Cubit<ProductState> {
       final DataState dataState =
           await productRepository.getAllProducts(token, ids);
 
-
       if (dataState is DataSuccess<List<Product>>) {
         if (dataState.data != null && dataState.data!.isNotEmpty) {
           final products = dataState.data!;
@@ -73,7 +74,6 @@ class ProductCubit extends Cubit<ProductState> {
               final product = products[j];
 
               if (orderedProduct.productId == product.id) {
-
                 basketItems.add(BasketItem(
                     product: product, orderCount: orderedProduct.orderCount));
                 break;
@@ -117,5 +117,15 @@ class ProductCubit extends Cubit<ProductState> {
     final DataState dataState = await productRepository.getAllCategories(token);
 
     emit(state.copyWith(newStatus: GetCategoriesStatus(dataState)));
+  }
+
+  void getPaymentTypes() async {
+
+    final token = await locator<PrefsOperator>().getUserToken();
+    emit(state.copyWith(newStatus: LoadingStatus()));
+    final DataState<List<PaymentType>> dataState =
+        await productRepository.getAllPaymentTypes(token);
+
+    emit(state.copyWith(newStatus: GetPaymentTypesStatus(dataState)));
   }
 }

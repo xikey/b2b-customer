@@ -1,3 +1,4 @@
+import 'package:b2b_customer/features/feature_product/data/model/payment_type.dart';
 import 'package:dio/dio.dart';
 
 import '../../../common/error/app_exception.dart';
@@ -79,6 +80,19 @@ class ProductRepository {
       final categories = Category.fromList(response.data as List);
       // ZikeyLogger.showLog("products Response", products.toString());
       return DataSuccess(categories);
+    } on AppException catch (e) {
+      // ZikeyLogger.showLog("products Response", e.toString());
+      return DataFailed(e.dataFailed.error!);
+    }
+  }
+
+  Future<DataState<List<PaymentType>>> getAllPaymentTypes(String token) async {
+    try {
+      Response response = await apiProvider.callGetPaymentTypes(token);
+
+      final ptypes = PaymentType.fromList(response.data as List);
+      // ZikeyLogger.showLog("products Response", products.toString());
+      return DataSuccess(ptypes);
     } on AppException catch (e) {
       // ZikeyLogger.showLog("products Response", e.toString());
       return DataFailed(e.dataFailed.error!);

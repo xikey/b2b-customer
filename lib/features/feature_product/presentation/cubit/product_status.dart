@@ -43,13 +43,11 @@ class ReloadBasketBadge extends ProductStatus {
   ReloadBasketBadge(this.count);
 }
 
-
 class GetCategoriesStatus extends ProductStatus {
   final DataState dataState;
 
   GetCategoriesStatus(this.dataState);
 }
-
 
 class SearchStatus extends ProductStatus {
   final String keySearch;
@@ -59,8 +57,8 @@ class SearchStatus extends ProductStatus {
 
 class Reload extends ProductStatus {}
 
+class GetPaymentTypesStatus extends ProductStatus {
+  final DataState<List<PaymentType>> dataState;
 
-
-
-
-
+  GetPaymentTypesStatus(this.dataState);
+}

@@ -35,23 +35,25 @@ class BasketCardItem extends StatelessWidget {
               ),
             ),
             Expanded(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  buildRichText("نام", basketItem.product.name, context,fontSize: 12),
-                  buildRichText(
-                      "فی",
-                      basketItem.product.priceForoosh
-                          .toString()
-                          .seRagham(),
-                      context,fontSize: 10),
-                  buildRichText("تعداد",
-                      basketItem.orderCount.toString().seRagham(), context,fontSize: 10),
-                  buildRichText("تخفیف", "0".seRagham(), context,fontSize: 10),
-                  buildRichText(
-                      "مبلغ", price.toString().seRagham(), context,fontSize: 10),
-                ],
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    buildRichText("نام", basketItem.product.name, context,fontSize: 12,),
+                    buildRichText(
+                        "فی",
+                        basketItem.product.priceForoosh
+                            .toString()
+                            .seRagham(),
+                        context,fontSize: 10),
+                    buildRichText("تعداد",
+                        basketItem.orderCount.toString().seRagham(), context,fontSize: 10),
+                    buildRichText("تخفیف", "0".seRagham(), context,fontSize: 10),
+                    buildRichText(
+                        "مبلغ", price.toString().seRagham(), context,fontSize: 10),
+                  ],
+                ),
               ),
             ),
           ],

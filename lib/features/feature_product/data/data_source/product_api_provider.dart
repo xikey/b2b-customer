@@ -129,13 +129,27 @@ class ProductApiProvider {
       final response = await dio
           .get("${Constants.baseUrl}/product/getCategories", options: options);
 
-      ZikeyLogger.showLog("categories response", response.toString());
+      return response;
+    } on DioException catch (e) {
+      final error = await ZikeyErrorHandler.getError(e.response);
+      throw error;
+    }
+  }
+
+
+  dynamic callGetPaymentTypes(String token) async {
+    try {
+      final options = Options(
+        headers: {
+          'Authorization': 'Bearer ${token}',
+        },
+      );
+      final response = await dio
+          .get("${Constants.baseUrl}/product/getPaymentTypes", options: options);
+
 
       return response;
     } on DioException catch (e) {
-      ZikeyLogger.showLog(
-          "Add new product Api Provider Erros", e.response.toString());
-      ZikeyLogger.showLog("Customer Api Provider Erros", e.toString());
       final error = await ZikeyErrorHandler.getError(e.response);
       throw error;
     }
