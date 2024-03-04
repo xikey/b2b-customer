@@ -3,6 +3,8 @@ import 'dart:html';
 import 'package:b2b_customer/common/utils/basket.dart';
 import 'package:b2b_customer/common/utils/logger.dart';
 import 'package:b2b_customer/features/feature_product/data/model/basket_item.dart';
+import 'package:b2b_customer/features/feature_product/data/model/new_order_result.dart';
+import 'package:b2b_customer/features/feature_product/data/model/order.dart';
 import 'package:b2b_customer/features/feature_product/data/model/payment_type.dart';
 import 'package:b2b_customer/features/feature_product/data/model/product.dart';
 import 'package:bloc/bloc.dart';
@@ -127,5 +129,15 @@ class ProductCubit extends Cubit<ProductState> {
         await productRepository.getAllPaymentTypes(token);
 
     emit(state.copyWith(newStatus: GetPaymentTypesStatus(dataState)));
+  }
+
+  void addOrder(Order order) async {
+
+    final token = await locator<PrefsOperator>().getUserToken();
+    emit(state.copyWith(newStatus: LoadingStatus()));
+    final DataState<NewOrderResult> dataState =
+    await productRepository.addOrder(token,order);
+
+    emit(state.copyWith(newStatus: AddOrderStatus(dataState)));
   }
 }

@@ -62,3 +62,9 @@ class GetPaymentTypesStatus extends ProductStatus {
 
   GetPaymentTypesStatus(this.dataState);
 }
+
+class AddOrderStatus extends ProductStatus {
+  final DataState<NewOrderResult> dataState;
+
+  AddOrderStatus(this.dataState);
+}

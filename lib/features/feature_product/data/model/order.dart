@@ -1,31 +1,41 @@
-import 'ordered_product.dart';
+import 'package:b2b_customer/features/feature_product/data/model/payment_type.dart';
+
+import 'basket_item.dart';
 
 class Order {
-  List<OrderedProduct> orderedProducts;
-  DateTime orderDate;
-  // You can add other properties relevant to an order
+  List<BasketItem> orderedProducts;
+  String uuid;
+  String? comment;
+  PaymentType paymentType;
+  int totalPrice;
 
   Order({
     required this.orderedProducts,
-    required this.orderDate,
-    // Add other properties as needed
+    required this.uuid,
+    required this.comment,
+    required this.paymentType,
+    required this.totalPrice,
   });
 
   Map<String, dynamic> toJson() {
     return {
       'orderedProducts': orderedProducts.map((orderedProduct) => orderedProduct.toJson()).toList(),
-      'orderDate': orderDate.toIso8601String(), // Convert DateTime to a string
-      // Add other properties as needed
+      'uuid': uuid,
+      'comment': comment,
+      'paymentType': paymentType,
+      'totalPrice': totalPrice,
     };
   }
 
   factory Order.fromJson(Map<String, dynamic> json) {
     return Order(
       orderedProducts: (json['orderedProducts'] as List<dynamic>)
-          .map((item) => OrderedProduct.fromJson(item))
+          .map((item) => BasketItem.fromJson(item))
           .toList(),
-      orderDate: DateTime.parse(json['orderDate']),
-      // Add other properties as needed
+      uuid: json['uuid'],
+      comment: json['comment'],
+      paymentType: json['paymentType'],
+      totalPrice: json['totalPrice'],
     );
   }
 }

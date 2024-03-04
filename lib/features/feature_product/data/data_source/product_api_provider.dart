@@ -4,6 +4,7 @@ import '../../../../common/error/check_exceptions.dart';
 
 import '../../../../common/utils/logger.dart';
 import '../../../../config/constants.dart';
+import '../model/order.dart';
 
 class ProductApiProvider {
   Dio dio;
@@ -39,7 +40,8 @@ class ProductApiProvider {
     }
   }
 
-  dynamic callGetAllProducts(String token, String? productIds,{String? keySearch}) async {
+  dynamic callGetAllProducts(String token, String? productIds,
+      {String? keySearch}) async {
     try {
       final options = Options(
         headers: {
@@ -63,7 +65,7 @@ class ProductApiProvider {
       final response = await dio.get(
         "${Constants.baseUrl}/product/getAll",
         options: options,
-        queryParameters:queryParameters,
+        queryParameters: queryParameters,
       );
       //
       // ZikeyLogger.showLog(
@@ -136,7 +138,6 @@ class ProductApiProvider {
     }
   }
 
-
   dynamic callGetPaymentTypes(String token) async {
     try {
       final options = Options(
@@ -144,10 +145,29 @@ class ProductApiProvider {
           'Authorization': 'Bearer ${token}',
         },
       );
-      final response = await dio
-          .get("${Constants.baseUrl}/product/getPaymentTypes", options: options);
+      final response = await dio.get(
+          "${Constants.baseUrl}/product/getPaymentTypes",
+          options: options);
 
+      return response;
+    } on DioException catch (e) {
+      final error = await ZikeyErrorHandler.getError(e.response);
+      throw error;
+    }
+  }
 
+  dynamic callAddOrder(String token, Order order) async {
+    try {
+      final options = Options(
+        headers: {
+          'Authorization': 'Bearer ${token}',
+          'Content-Type': 'application/json', // Specify the content type as JSON
+        },
+      );
+      final response = await dio.post("${Constants.baseUrl}/product/addOrder",
+          options: options, data: order);
+
+      ZikeyLogger.showLog("NEW ORDER RESPONSE", response.toString());
       return response;
     } on DioException catch (e) {
       final error = await ZikeyErrorHandler.getError(e.response);

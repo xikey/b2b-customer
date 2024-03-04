@@ -5,6 +5,7 @@ import 'package:b2b_customer/features/feature_product/presentation/cubit/product
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../params/result/finalize_basket_dialog_result.dart';
 import '../resources/data_state.dart';
 import 'dot_loading_widget.dart';
 import 'drop_down_text_field_widget.dart';
@@ -62,8 +63,8 @@ class FinalizeBasketDialog extends StatelessWidget {
                       label: 'نحوه پرداخت',
                       onItemSelected: (text) {
                         if (text != null) {
-                          selectedPaymentType =
-                              list.firstWhere((element) => element.name == text);
+                          selectedPaymentType = list
+                              .firstWhere((element) => element.name == text);
                         }
                       },
                     ),
@@ -101,11 +102,14 @@ class FinalizeBasketDialog extends StatelessWidget {
         ),
         TextButton(
           onPressed: () {
-            if(selectedPaymentType==null){
-              ZikeyToast().showSnackBarInfo(context, "ابتدا نحوه پرداخت را مشخص نمایید");
+            if (selectedPaymentType == null) {
+              ZikeyToast().showSnackBarInfo(
+                  context, "ابتدا نحوه پرداخت را مشخص نمایید");
               return;
             }
-            Navigator.of(context).pop();
+            Navigator.of(context).pop(FinalizeBasketDialogResult(
+                paymentType: selectedPaymentType!,
+                comment: _commentsController.value.text));
           },
           child: const Text('ذخیره'),
         ),

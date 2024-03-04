@@ -1,3 +1,5 @@
+import 'package:b2b_customer/features/feature_product/data/model/new_order_result.dart';
+import 'package:b2b_customer/features/feature_product/data/model/order.dart';
 import 'package:b2b_customer/features/feature_product/data/model/payment_type.dart';
 import 'package:dio/dio.dart';
 
@@ -93,6 +95,21 @@ class ProductRepository {
       final ptypes = PaymentType.fromList(response.data as List);
       // ZikeyLogger.showLog("products Response", products.toString());
       return DataSuccess(ptypes);
+    } on AppException catch (e) {
+      // ZikeyLogger.showLog("products Response", e.toString());
+      return DataFailed(e.dataFailed.error!);
+    }
+  }
+
+
+  Future<DataState<NewOrderResult>> addOrder(String token,Order order) async {
+    try {
+      Response response = await apiProvider.callAddOrder(token,order);
+
+       final result = NewOrderResult.fromJson(response.data);
+      // // ZikeyLogger.showLog("products Response", products.toString());
+       return DataSuccess(result);
+
     } on AppException catch (e) {
       // ZikeyLogger.showLog("products Response", e.toString());
       return DataFailed(e.dataFailed.error!);

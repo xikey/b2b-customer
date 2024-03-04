@@ -97,4 +97,8 @@ class Basket {
         .map((item) => OrderedProduct.fromJson(json.decode(item)))
         .toList();
   }
+
+  clearBasket() async {
+    await sharedPreferences.remove('basketItems');
+  }
 }
