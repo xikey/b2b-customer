@@ -56,15 +56,15 @@ class VitrinWidget extends StatelessWidget {
                     child: Center(
                         child: Column(
                       children: [
-                        SearchBarWidget(
-                          onTap: () {
-                            Navigator.of(context)
-                                .pushNamed(SearchScreenProvider.routeName)
-                                .then((value) =>
-                                    BlocProvider.of<productCubit.ProductCubit>(context)
-                                        .reloadBasketBudge());
-                          },
-                        ),
+                        // SearchBarWidget(
+                        //   onTap: () {
+                        //     Navigator.of(context)
+                        //         .pushNamed(SearchScreenProvider.routeName)
+                        //         .then((value) =>
+                        //             BlocProvider.of<productCubit.ProductCubit>(context)
+                        //                 .reloadBasketBudge());
+                        //   },
+                        // ),
                         LayoutBuilder(
                           builder: (BuildContext context, BoxConstraints constraints) {
                             final List<ImageSliderItem> imageSliderItems = [];

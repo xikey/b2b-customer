@@ -27,12 +27,8 @@ class HomeWidget extends StatelessWidget {
         return const CategoriesWidget();
       } else if (index == 2) {
         return const BasketWidget();
-      } else {
-        return const TestViewWidget(
-          name: 'index 3',
-          color: Colors.yellowAccent,
-        );
       }
+      return const VitrinWidget();
     }
 
     return DelayedWidget(
@@ -104,10 +100,7 @@ class HomeWidget extends StatelessWidget {
                         ),
                         label: 'سبد خرید',
                       ),
-                      const BottomNavigationBarItem(
-                        icon: Icon(Icons.person_rounded),
-                        label: 'پروفایل',
-                      ),
+
                     ],
                     currentIndex: selectedIndex,
                     onTap: (index) {

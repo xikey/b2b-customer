@@ -3,6 +3,7 @@ import 'package:b2b_customer/features/feature_advertise/repository/advertise_rep
 import 'package:b2b_customer/features/feature_home/presentation/cubit/home_cubit.dart';
 import 'package:b2b_customer/features/feature_home/presentation/screen/home_screen.dart';
 import 'package:b2b_customer/features/feature_product/presentation/cubit/product_cubit.dart';
+import 'package:b2b_customer/features/feature_product/presentation/screen/orders_screen.dart';
 import 'package:b2b_customer/features/feature_product/presentation/screen/products_screen.dart';
 import 'package:b2b_customer/features/feature_product/presentation/screen/serach_screen.dart';
 import 'package:b2b_customer/features/feature_product/repository/product_repository.dart';
@@ -65,6 +66,8 @@ class MyApp extends StatelessWidget {
             const ProductScreenProvider(),
         SearchScreenProvider.routeName: (context) =>
             const SearchScreenProvider(),
+        OrdersScreenProvider.routeName: (context) =>
+        const OrdersScreenProvider(),
       },
       debugShowCheckedModeBanner: false,
       title: 'B2B',

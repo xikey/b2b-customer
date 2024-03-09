@@ -1,5 +1,6 @@
 import 'package:b2b_customer/features/feature_product/data/model/new_order_result.dart';
 import 'package:b2b_customer/features/feature_product/data/model/order.dart';
+import 'package:b2b_customer/features/feature_product/data/model/order_history.dart';
 import 'package:b2b_customer/features/feature_product/data/model/payment_type.dart';
 import 'package:dio/dio.dart';
 
@@ -110,6 +111,19 @@ class ProductRepository {
       // // ZikeyLogger.showLog("products Response", products.toString());
        return DataSuccess(result);
 
+    } on AppException catch (e) {
+      // ZikeyLogger.showLog("products Response", e.toString());
+      return DataFailed(e.dataFailed.error!);
+    }
+  }
+
+  Future<DataState<List<OrderHistory>>> getOrders(String token) async {
+    try {
+      Response response = await apiProvider.callGetOrders(token);
+
+      final orders = OrderHistory.fromList(response.data as List);
+      // ZikeyLogger.showLog("products Response", products.toString());
+      return DataSuccess(orders);
     } on AppException catch (e) {
       // ZikeyLogger.showLog("products Response", e.toString());
       return DataFailed(e.dataFailed.error!);

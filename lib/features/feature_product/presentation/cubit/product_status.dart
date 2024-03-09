@@ -68,3 +68,9 @@ class AddOrderStatus extends ProductStatus {
 
   AddOrderStatus(this.dataState);
 }
+
+class GetOrdersStatus extends ProductStatus {
+  final DataState<List<OrderHistory>> dataState;
+
+  GetOrdersStatus(this.dataState);
+}

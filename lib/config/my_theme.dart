@@ -43,6 +43,20 @@ class MyThemes {
       hoverColor: Colors.green, // Change this color to your preference
     ),
     appBarTheme: const AppBarTheme(
+      iconTheme: IconThemeData(color: Colors.white),
+      actionsIconTheme: IconThemeData(color: Colors.white),
+      titleTextStyle: TextStyle(
+        fontFamily: 'Estedad',
+        color: Colors.white,
+        fontSize: 17,
+        fontWeight: FontWeight.bold,
+      ),
+      toolbarTextStyle: TextStyle(
+        fontFamily: 'Estedad',
+        color: Colors.white,
+        fontSize: 17,
+        fontWeight: FontWeight.bold,
+      ),
       backgroundColor:
           Colors.lightGreen, // Change this color to your preference
     ),

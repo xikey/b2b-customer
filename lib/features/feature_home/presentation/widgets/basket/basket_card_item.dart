@@ -56,6 +56,7 @@ class BasketCardItem extends StatelessWidget {
                 ),
               ),
             ),
+            Container(width: 10,)
           ],
         ),
       ),

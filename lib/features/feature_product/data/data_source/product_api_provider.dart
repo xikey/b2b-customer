@@ -174,4 +174,22 @@ class ProductApiProvider {
       throw error;
     }
   }
+
+  dynamic callGetOrders(String token) async {
+    try {
+      final options = Options(
+        headers: {
+          'Authorization': 'Bearer ${token}',
+        },
+      );
+      final response = await dio.get(
+          "${Constants.baseUrl}/product/getOrdersHeader",
+          options: options);
+
+      return response;
+    } on DioException catch (e) {
+      final error = await ZikeyErrorHandler.getError(e.response);
+      throw error;
+    }
+  }
 }
