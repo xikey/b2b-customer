@@ -1,36 +1,33 @@
-import 'package:b2b_customer/common/widgets/add_to_basket_widget.dart';
-import 'package:b2b_customer/features/feature_product/data/model/product.dart';
-import 'package:b2b_customer/features/feature_product/presentation/screen/order_items_screen.dart';
+import 'package:b2b_customer/features/feature_product/data/model/order_history_item.dart';
 import 'package:b2b_customer/features/feature_product/presentation/widgets/order_card_widget.dart';
-import 'package:b2b_customer/features/feature_product/presentation/widgets/product_card_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
-import '../../../../common/params/args/product_screen_args.dart';
 import '../../../../common/resources/data_state.dart';
 import '../../../../common/utils/toasty.dart';
 import '../../../../common/widgets/dot_loading_widget.dart';
 import '../../../../config/colors.dart';
-import '../../data/model/order_history.dart';
 import '../cubit/product_cubit.dart';
+import 'order_item_card_widget.dart';
 
-class OrdersWidget extends StatelessWidget {
-  OrdersWidget({Key? key}) : super(key: key);
+class OrderItemsWidget extends StatelessWidget {
+  OrderItemsWidget({Key? key, required this.orderId}) : super(key: key);
+  final int orderId;
 
-  List<OrderHistory> orders = [];
+  List<OrderHistoryItem> orders = [];
 
   @override
   Widget build(BuildContext buildContext) {
-    BlocProvider.of<ProductCubit>(buildContext).getOrders();
+    BlocProvider.of<ProductCubit>(buildContext).getOrderItems(orderId);
 
     return BlocConsumer<ProductCubit, ProductState>(
       buildWhen: (previous, current) => previous != current,
       listenWhen: (previous, current) => previous != current,
       listener: (context, state) {
         //
-        if (state.productStatus is GetOrdersStatus) {
-          final status = state.productStatus as GetOrdersStatus;
+        if (state.productStatus is GetOrderItemsStatus) {
+          final status = state.productStatus as GetOrderItemsStatus;
           if (status.dataState is DataSuccess) {
             final data = status.dataState as DataSuccess;
             if (data.data != null) {
@@ -40,11 +37,6 @@ class OrdersWidget extends StatelessWidget {
             ZikeyToast()
                 .showSnackBarError(context, "خطا در دریافت اطلاعات  محصولات");
           }
-        }
-
-        if (state.productStatus is SearchStatus) {
-          // final status = state.productStatus as SearchStatus;
-          // keySearch = status.keySearch;
         }
       },
       builder: (context, state) {
@@ -68,14 +60,7 @@ class OrdersWidget extends StatelessWidget {
                 itemCount: orders.length,
                 crossAxisSpacing: 4,
                 itemBuilder: (context, index) {
-                  return OrderCardWidget(
-                      orderHistory: orders[index],
-                      onTap: () {
-                        Navigator.of(context).pushNamed(
-                            OrderItemsScreenProvider.routeName,
-                            arguments: orders[index].sefaresh_ID);
-                      },
-                      rowNum: index + 1);
+                  return OrderItemCardWidget(item: orders[index],width: constraints.maxWidth-20,);
                 },
               ),
             );

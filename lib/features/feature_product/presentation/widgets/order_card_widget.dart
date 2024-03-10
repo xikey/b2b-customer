@@ -54,28 +54,30 @@ class OrderCardWidget extends StatelessWidget {
               const SizedBox(
                 width: 5,
               ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  buildRichText(
-                    "تاریخ ثبت",
-                    '${orderHistory.order_time}  ${orderHistory.order_date}',
-                    context,
-                    fontSize: 13,
-                  ),
-                  buildRichText(
-                      "نحوه پرداخت", orderHistory.sharhNahveh.toString(), context,
-                      fontSize: 13),
-                  buildRichText("مبلغ",
-                      orderHistory.rJamKol.toString().seRagham(), context,
-                      fontSize: 13),
-                  buildRichText(
-                      "وضعیت", vaziatTranslator(orderHistory.vaziat), context,
-                      fontSize: 13),
-                  buildRichText("توضیحات", orderHistory.tozihat, context,
-                      fontSize: 13),
-                ],
+              Expanded(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    buildRichText(
+                      "تاریخ ثبت",
+                      '${orderHistory.order_time}  ${orderHistory.order_date}',
+                      context,
+                      fontSize: 13,
+                    ),
+                    buildRichText(
+                        "نحوه پرداخت", orderHistory.sharhNahveh.toString(), context,
+                        fontSize: 13),
+                    buildRichText("مبلغ",
+                        orderHistory.rJamKol.toString().seRagham(), context,
+                        fontSize: 13),
+                    buildRichText(
+                        "وضعیت", vaziatTranslator(orderHistory.vaziat), context,
+                        fontSize: 13),
+                    buildRichText("توضیحات", orderHistory.tozihat, context,
+                        fontSize: 13),
+                  ],
+                ),
               ),
               Container(
                 width: 10,

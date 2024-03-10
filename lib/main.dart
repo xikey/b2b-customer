@@ -18,6 +18,7 @@ import 'features/feature_auth/presentation/screens/login_screen.dart';
 import 'features/feature_auth/repository/auth_repository.dart';
 import 'features/feature_intro/presentation/bloc/splash_bloc.dart';
 import 'features/feature_intro/presentation/screens/splash_screen.dart';
+import 'features/feature_product/presentation/screen/order_items_screen.dart';
 import 'features/feature_product/presentation/screen/product_screen.dart';
 import 'locator.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -57,7 +58,6 @@ class MyApp extends StatelessWidget {
         Locale("fa", ""),
       ],
       routes: {
-
         LoginScreenProvider.routeName: (context) => const LoginScreenProvider(),
         HomeScreenProvider.routeName: (context) => const HomeScreenProvider(),
         ProductsScreenProvider.routeName: (context) =>
@@ -67,7 +67,9 @@ class MyApp extends StatelessWidget {
         SearchScreenProvider.routeName: (context) =>
             const SearchScreenProvider(),
         OrdersScreenProvider.routeName: (context) =>
-        const OrdersScreenProvider(),
+            const OrdersScreenProvider(),
+        OrderItemsScreenProvider.routeName: (context) =>
+            const OrderItemsScreenProvider(),
       },
       debugShowCheckedModeBanner: false,
       title: 'B2B',

@@ -6,6 +6,7 @@ import 'package:b2b_customer/features/feature_product/data/model/basket_item.dar
 import 'package:b2b_customer/features/feature_product/data/model/new_order_result.dart';
 import 'package:b2b_customer/features/feature_product/data/model/order.dart';
 import 'package:b2b_customer/features/feature_product/data/model/order_history.dart';
+import 'package:b2b_customer/features/feature_product/data/model/order_history_item.dart';
 import 'package:b2b_customer/features/feature_product/data/model/payment_type.dart';
 import 'package:b2b_customer/features/feature_product/data/model/product.dart';
 import 'package:bloc/bloc.dart';
@@ -123,7 +124,6 @@ class ProductCubit extends Cubit<ProductState> {
   }
 
   void getPaymentTypes() async {
-
     final token = await locator<PrefsOperator>().getUserToken();
     emit(state.copyWith(newStatus: LoadingStatus()));
     final DataState<List<PaymentType>> dataState =
@@ -133,22 +133,29 @@ class ProductCubit extends Cubit<ProductState> {
   }
 
   void addOrder(Order order) async {
-
     final token = await locator<PrefsOperator>().getUserToken();
     emit(state.copyWith(newStatus: LoadingStatus()));
     final DataState<NewOrderResult> dataState =
-    await productRepository.addOrder(token,order);
+        await productRepository.addOrder(token, order);
 
     emit(state.copyWith(newStatus: AddOrderStatus(dataState)));
   }
 
   void getOrders() async {
-
     final token = await locator<PrefsOperator>().getUserToken();
     emit(state.copyWith(newStatus: LoadingStatus()));
     final DataState<List<OrderHistory>> dataState =
-    await productRepository.getOrders(token);
+        await productRepository.getOrders(token);
 
     emit(state.copyWith(newStatus: GetOrdersStatus(dataState)));
+  }
+
+  void getOrderItems(int orderId) async {
+    final token = await locator<PrefsOperator>().getUserToken();
+    emit(state.copyWith(newStatus: LoadingStatus()));
+    final DataState<List<OrderHistoryItem>> dataState =
+        await productRepository.getOrderItems(token, orderId);
+
+    emit(state.copyWith(newStatus: GetOrderItemsStatus(dataState)));
   }
 }

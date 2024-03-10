@@ -161,7 +161,8 @@ class ProductApiProvider {
       final options = Options(
         headers: {
           'Authorization': 'Bearer ${token}',
-          'Content-Type': 'application/json', // Specify the content type as JSON
+          'Content-Type': 'application/json',
+          // Specify the content type as JSON
         },
       );
       final response = await dio.post("${Constants.baseUrl}/product/addOrder",
@@ -188,6 +189,30 @@ class ProductApiProvider {
 
       return response;
     } on DioException catch (e) {
+      final error = await ZikeyErrorHandler.getError(e.response);
+      throw error;
+    }
+  }
+
+  dynamic callGetOrderItems(String token, int orderID) async {
+    try {
+      final options = Options(
+        headers: {
+          'Authorization': 'Bearer ${token}',
+        },
+      );
+
+      Map<String, dynamic> queryParameters = {'orderID': orderID};
+
+      final response = await dio.get(
+          "${Constants.baseUrl}/product/getOrderItems",
+          options: options,
+          queryParameters: queryParameters);
+      ZikeyLogger.showLog(" ORDER ITEMS RESPONSE", response.toString());
+      return response;
+
+    } on DioException catch (e) {
+      ZikeyLogger.showLog(" ORDER ITEMS RESPONSE", e.toString());
       final error = await ZikeyErrorHandler.getError(e.response);
       throw error;
     }
