@@ -1,4 +1,3 @@
-import 'dart:html';
 
 import 'package:b2b_customer/common/utils/basket.dart';
 import 'package:b2b_customer/common/utils/logger.dart';
