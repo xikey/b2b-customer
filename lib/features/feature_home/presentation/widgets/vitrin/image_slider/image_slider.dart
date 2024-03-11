@@ -7,13 +7,14 @@ import '../../../../../../common/model/image_slider_item.dart';
 import '../../../../../../common/widgets/zikey_image_view.dart';
 
 class ImageSlider extends StatefulWidget {
-  const ImageSlider({super.key, required this.hegiht, required this.items});
+  const ImageSlider({super.key, required this.hegiht, required this.items, required this.width});
 
   final List<ImageSliderItem> items;
 
   @override
   _ImageSliderState createState() => _ImageSliderState();
   final double hegiht;
+  final double width;
 }
 
 class _ImageSliderState extends State<ImageSlider> {
@@ -48,7 +49,7 @@ class _ImageSliderState extends State<ImageSlider> {
                   return Container(
                     width: double.infinity,
                     child: ZikeyImageView(
-                      imageUrl: item.imageUrl,
+                      imageUrl: item.imageUrl, width: widget.width, height: widget.hegiht,
                     ),
                   );
                 },

@@ -84,6 +84,7 @@ class VitrinWidget extends StatelessWidget {
                             return Container(
                               color: Colors.white,
                               child: ImageSlider(
+                                width: constraints.maxWidth,
                                 hegiht: height,
                                 items: imageSliderItems,
                               ),

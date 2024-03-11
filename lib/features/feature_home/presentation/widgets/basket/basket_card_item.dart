@@ -29,6 +29,8 @@ class BasketCardItem extends StatelessWidget {
               margin: const EdgeInsets.all(12),
               child: Center(
                 child: ZikeyImageView(
+                  width: height,
+                  height: height,
                   borderRadius: 10,
                   imageUrl: basketItem.product.getImageUrl(),
                 ),

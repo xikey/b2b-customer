@@ -1,4 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:b2b_customer/common/utils/logger.dart';
 import 'package:dio/dio.dart';
 
 import '../../../../common/error/check_exceptions.dart';
@@ -22,8 +23,10 @@ class AuthApiProvider {
             "ip": "0.0.0.0"
           });
 
+      ZikeyLogger.showLog("AUTH", response.toString());
       return response;
     } on DioError catch (e) {
+      ZikeyLogger.showLog("AUTH", e.toString());
       final error = await ZikeyErrorHandler.getError(e.response);
       throw error;
     }

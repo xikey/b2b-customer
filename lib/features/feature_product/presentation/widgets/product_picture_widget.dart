@@ -17,7 +17,7 @@ class ProductPictureWidget extends StatelessWidget {
           child: SizedBox(
         width: smallSide,
         height: smallSide,
-            child: ZikeyImageView(imageUrl: imageUrl,),
+            child: ZikeyImageView(imageUrl: imageUrl, width: smallSide, height: smallSide,),
       ));
     });
   }

@@ -29,7 +29,7 @@ class OrderItemCardWidget extends StatelessWidget {
               child: Center(
                 child: ZikeyImageView(
                   borderRadius: 10,
-                  imageUrl: item.getImageUrl(),
+                  imageUrl: item.getImageUrl(), width: height, height: height,
                 ),
               ),
             ),

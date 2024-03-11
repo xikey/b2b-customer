@@ -34,6 +34,8 @@ class CategoryCardItem extends StatelessWidget {
                 margin: const EdgeInsets.all(12),
                 child: Center(
                   child: ZikeyImageView(
+                    width: width,
+                    height: width,
                     borderRadius: 10,
                     imageUrl: category.getImageUrl(),
                   ),

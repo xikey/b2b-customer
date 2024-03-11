@@ -45,7 +45,7 @@ class HomeProductCardItem extends StatelessWidget {
                   child: Center(
                     child: ZikeyImageView(
                       borderRadius: 10,
-                      imageUrl: product.getImageUrl(),
+                      imageUrl: product.getImageUrl(), width: width, height: width,
                     ),
                   ),
                 ),

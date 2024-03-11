@@ -32,7 +32,7 @@ class CategoryCardVitrinItem extends StatelessWidget {
                 onTap: onTap,
                 child: ZikeyImageView(
                   borderRadius: 50,
-                  imageUrl: category.getImageUrl(),
+                  imageUrl: category.getImageUrl(), width: width, height: width,
                 ),
               ),
             ),
