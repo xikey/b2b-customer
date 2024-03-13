@@ -62,12 +62,13 @@ class ProductCardItem extends StatelessWidget {
                   height: 30,
                   child: Center(
                       child: Text(
+                        textDirection: TextDirection.ltr,
                     style: TextStyle(
                         fontSize: 12,
                         fontWeight: FontWeight.bold,
                         fontFamily: 'Estedad',
                         color: AppColors.yadegar_1),
-                    "${product.priceForoosh.toString().seRagham()} ریال ",
+                    "${product.priceForoosh.toString().seRagham()}",
                     textAlign: TextAlign.center,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,

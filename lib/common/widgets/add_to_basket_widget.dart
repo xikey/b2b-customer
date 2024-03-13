@@ -1,6 +1,7 @@
 import 'package:b2b_customer/common/utils/basket.dart';
 import 'package:b2b_customer/common/utils/toasty.dart';
 import 'package:b2b_customer/common/widgets/rich_text_builder.dart';
+import 'package:b2b_customer/common/widgets/row_text_builder.dart';
 import 'package:b2b_customer/features/feature_product/data/model/ordered_product.dart';
 import 'package:b2b_customer/features/feature_product/data/model/product.dart';
 import 'package:b2b_customer/locator.dart';
@@ -80,9 +81,11 @@ class _AddToBasketDialogState extends State<AddToBasketDialog> {
           buildRichText(
               "واحد سنجش", widget.product.vahedAsli.toString(), context),
           const SizedBox(height: 5),
-          buildRichText(
+          buildRowText(
+
               "قیمت واحد",
-              "${widget.product.priceForoosh.toString().seRagham()} ریال",
+              "${widget.product.priceForoosh.toString().seRagham()}",
+
               context),
           const SizedBox(
             height: 10,
@@ -146,8 +149,8 @@ class _AddToBasketDialogState extends State<AddToBasketDialog> {
                 "$totalCount ${widget.product.vahedAsli}", context),
           ),
           Center(
-              child: buildRichText("مبلغ نهایی",
-                  "${price.toString().seRagham()} ریال", context)),
+              child: buildRowText("مبلغ نهایی",
+                  "${price.toString().seRagham()} ", context,mainAxisAlignment: MainAxisAlignment.center)),
         ],
       ),
       actions: [

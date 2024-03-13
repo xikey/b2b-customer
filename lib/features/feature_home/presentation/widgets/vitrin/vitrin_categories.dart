@@ -51,7 +51,7 @@ class vitrin_categories extends StatelessWidget {
               height: 150,
               color: AppColors.yadegar_1,
               child: AlignedGridView.count(
-                crossAxisCount: categories.length,
+                crossAxisCount: categories.length>4?4:categories.length,
                 mainAxisSpacing: 4,
                 itemCount: categories.length,
                 crossAxisSpacing: 4,

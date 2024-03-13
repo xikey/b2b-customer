@@ -24,8 +24,7 @@ class HomeProductCardItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-    final width=height/2;
+    final width = height / 2;
     return InkWell(
       onTap: onTap,
       child: SizedBox(
@@ -45,7 +44,9 @@ class HomeProductCardItem extends StatelessWidget {
                   child: Center(
                     child: ZikeyImageView(
                       borderRadius: 10,
-                      imageUrl: product.getImageUrl(), width: width, height: width,
+                      imageUrl: product.getImageUrl(),
+                      width: width,
+                      height: width,
                     ),
                   ),
                 ),
@@ -68,6 +69,7 @@ class HomeProductCardItem extends StatelessWidget {
                   height: 25,
                   child: Center(
                       child: Text(
+                    textDirection: TextDirection.ltr,
                     style: TextStyle(
                         fontSize: 12,
                         fontWeight: FontWeight.bold,

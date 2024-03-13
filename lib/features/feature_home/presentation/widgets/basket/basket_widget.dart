@@ -1,6 +1,7 @@
 import 'package:b2b_customer/common/resources/data_state.dart';
 import 'package:b2b_customer/common/utils/basket.dart';
 import 'package:b2b_customer/common/utils/toasty.dart';
+import 'package:b2b_customer/common/widgets/row_text_builder.dart';
 import 'package:b2b_customer/features/feature_home/presentation/widgets/basket/basket_items_widget.dart';
 import 'package:b2b_customer/features/feature_product/data/model/basket_item.dart';
 import 'package:b2b_customer/features/feature_product/data/model/order.dart';
@@ -127,10 +128,10 @@ class BasketWidget extends StatelessWidget {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              buildRichText("تخفیف نهایی", "0", context),
-                              buildRichText(
+                              buildRowText("تخفیف نهایی", "0", context),
+                              buildRowText(
                                   "مبلغ نهایی",
-                                  "${totalPrice.toString().seRagham()} ریال",
+                                  "${totalPrice.toString().seRagham()}",
                                   context),
                             ],
                           ),

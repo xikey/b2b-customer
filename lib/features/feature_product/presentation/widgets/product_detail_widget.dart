@@ -1,3 +1,4 @@
+import 'package:b2b_customer/common/widgets/row_text_builder.dart';
 import 'package:b2b_customer/config/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -35,8 +36,8 @@ class ProductDetailWidget extends StatelessWidget {
                 buildRichText("واحد سنجش", product.vahedAsli.toString(), context,
                     fontSize: 16),
                 const SizedBox(height: 10),
-                buildRichText("قیمت واحد",
-                    "${product.priceForoosh.toString().seRagham()} ریال", context,
+                buildRowText("قیمت واحد",
+                    "${product.priceForoosh.toString().seRagham()}", context,
                     fontSize: 16),
               ],
             ),
