@@ -32,8 +32,8 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _adminUserController = TextEditingController();
-    final _adminPassController = TextEditingController();
+    final adminUserController = TextEditingController();
+    final adminPassController = TextEditingController();
 
     return Scaffold(
       body: Container(
@@ -46,8 +46,8 @@ class LoginScreen extends StatelessWidget {
               return AnimatedContainer(
                 duration: const Duration(milliseconds: 1000),
                 child: LoginWidget(
-                  adminUserController: _adminUserController,
-                  adminPassController: _adminPassController,
+                  adminUserController: adminUserController,
+                  adminPassController: adminPassController,
                 ),
               );
             } else if (state.loginStatus is LoadingStatus) {

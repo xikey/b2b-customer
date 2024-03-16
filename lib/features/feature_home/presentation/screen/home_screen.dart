@@ -2,6 +2,7 @@ import 'package:b2b_customer/common/widgets/app_background.dart';
 import 'package:b2b_customer/config/colors.dart';
 import 'package:b2b_customer/features/feature_advertise/presentation/cubit/advertise_cubit.dart';
 import 'package:b2b_customer/features/feature_advertise/repository/advertise_repository.dart';
+import 'package:b2b_customer/features/feature_auth/presentation/screens/login_screen.dart';
 import 'package:b2b_customer/features/feature_product/presentation/cubit/product_cubit.dart';
 import 'package:b2b_customer/features/feature_product/presentation/screen/orders_screen.dart';
 import 'package:b2b_customer/features/feature_product/repository/product_repository.dart';
@@ -9,6 +10,7 @@ import 'package:b2b_customer/locator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../common/utils/prefs_operator.dart';
 import '../../../feature_product/presentation/screen/serach_screen.dart';
 import '../cubit/home_cubit.dart';
 import '../widgets/home_widget.dart';
@@ -103,11 +105,24 @@ class HomeScreen extends StatelessWidget {
               ),
               ListTile(
                 title: const Text('سوابق سفارشات'),
-                leading: Icon(Icons.receipt_rounded),
+                leading: const Icon(Icons.receipt_rounded),
                 onTap: () {
+                  Navigator.of(context)
+                      .pushNamed(OrdersScreenProvider.routeName);
+                },
+              ),
+              ListTile(
+                title: const Text('خروج از حساب'),
+                leading: const Icon(Icons.exit_to_app_rounded),
+                onTap: () {
+                  PrefsOperator prefsOperator = locator<PrefsOperator>();
+                  prefsOperator.clearUserData();
 
-                  Navigator.of(context).pushNamed(OrdersScreenProvider.routeName);
-
+                  Navigator.pushNamedAndRemoveUntil(
+                    context,
+                    LoginScreenProvider.routeName,
+                    ModalRoute.withName("login"),
+                  );
                 },
               ),
               // ListTile(

@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
+import '../../../../common/utils/prefs_operator.dart';
 import '../../../../common/widgets/app_background.dart';
+import '../../../../locator.dart';
 import '../../../feature_auth/presentation/screens/login_screen.dart';
 import '../bloc/splash_bloc.dart';
 import 'package:gif_view/gif_view.dart';
@@ -122,19 +124,25 @@ class _SpashScreenState extends State<SpashScreen>
   }
 
   Future<void> goToLogin(BuildContext context) async {
+
+    final token = await locator<PrefsOperator>().getUserToken();
+
     return Future.delayed(const Duration(seconds: 3), () {
 
-      // Navigator.pushNamedAndRemoveUntil(
-      //   context,
-      //   HomeScreenProvider.routeName,
-      //   ModalRoute.withName("main_wrapper"),
-      // );
+     if(token!=null&&token.isNotEmpty){
+       Navigator.pushNamedAndRemoveUntil(
+         context,
+         HomeScreenProvider.routeName,
+         ModalRoute.withName("home"),
+       );
 
-      Navigator.pushNamedAndRemoveUntil(
+     }else {
+       Navigator.pushNamedAndRemoveUntil(
         context,
         LoginScreenProvider.routeName,
         ModalRoute.withName("main_wrapper"),
       );
+     }
     });
   }
 }

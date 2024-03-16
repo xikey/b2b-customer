@@ -17,6 +17,11 @@ class PrefsOperator {
     sharedPreferences.setInt("user_code", code);
   }
 
+  clearUserData(){
+    sharedPreferences.setString("user_token", '');
+    sharedPreferences.setString("user_name", '');
+    sharedPreferences.setInt("user_code", 0);
+  }
 
   getUserToken() async {
     final String? userToken = sharedPreferences.getString('user_token');
